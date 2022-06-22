@@ -1,0 +1,7 @@
+﻿.idea
+**/**/bin/*
+**/**/obj/*
+src/Core/Givt.API/appsettings.Development.json
+.vs
+**/**/out/*
+/src/Core/Givt.Donations.API/appsettings.Development.json

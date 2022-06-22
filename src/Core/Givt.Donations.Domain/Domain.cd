@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Givt.Donations.Domain.Entities.PayOut">
+    <Position X="20.25" Y="9.5" Width="2.5" />
+    <Members>
+      <Property Name="CampaignId" Hidden="true" />
+      <Property Name="PaymentProviderId" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAQgACICABwAAAgECgAAEIwCAEAABQAEAAAgAIAEAA=</HashCode>
+      <FileName>Entities\PayOut.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Givt.Donations.Domain.Entities.Donation">
+    <Position X="14.25" Y="9.75" Width="2.25" />
+    <Members>
+      <Property Name="CampaignId" Hidden="true" />
+      <Property Name="DonorId" Hidden="true" />
+      <Property Name="HistoryEntityType" Hidden="true" />
+      <Property Name="MediumId" Hidden="true" />
+      <Property Name="PayinId" Hidden="true" />
+      <Property Name="RecipientId" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAQAAAQACQAgEBAAAAECACACAEAIACAAAAAAAEEAAA=</HashCode>
+      <FileName>Entities\Donation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Payin" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Givt.Donations.Domain.Entities.PayIn">
+    <Position X="17.5" Y="9.5" Width="2.5" />
+    <Members>
+      <Property Name="PayInMethodId" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAgCAEAAAQAEAAAAAIAEAA=</HashCode>
+      <FileName>Entities\PayIn.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Donations" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Givt.Donations.Domain.Entities.AppVersion">
+    <Position X="4" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAEAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Entities\AppVersion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="OperatingSystem" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Givt.Donations.Domain.Entities.DonationHistory">
+    <Position X="16.75" Y="0.75" Width="1.75" />
+    <Members>
+      <Property Name="Campaign" Hidden="true" />
+      <Property Name="Donor" Hidden="true" />
+      <Property Name="Medium" Hidden="true" />
+      <Property Name="Payin" Hidden="true" />
+      <Property Name="Recipient" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAQAAAQACQAgEBAAAAECACACAEAIACAAAAAAAEEAAA=</HashCode>
+      <FileName>Entities\DonationHistory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Givt.Donations.Domain.Entities.History">
+    <Position X="19.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAIAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\History.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Reason" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="Givt.Donations.Domain.Enums.DeviceOS">
+    <Position X="0.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\DeviceOS.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Givt.Donations.Domain.Enums.LogReason">
+    <Position X="19.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAQAQAAAAAAAAAA=</HashCode>
+      <FileName>Enums\LogReason.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
