@@ -1,0 +1,3 @@
+[submodule "Givt.Platform"]
+	path = Givt.Platform
+	url = https://github.com/givtnl/Givt.Platform
