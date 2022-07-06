@@ -1,23 +1,18 @@
 ﻿using AutoMapper;
-using Givt.API.Handlers;
 using Givt.Donations.API.Models.Donations;
-//using Givt.Donations.API.Models.Donations;
-//using Givt.Donations.API.Utils;
-//using Givt.Donations.Business.Models;
-//using Givt.Donations.Business.QR.ApplicationFee.Get;
-//using Givt.Donations.Business.QR.Donations.Create;
+using Givt.Platform.JWT.Handlers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Givt.Donations.API.Controllers;
 
 [Route("api/[controller]")]
-public class DonationController : ControllerBase
+public class DonationsController : ControllerBase
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
     private readonly JwtTokenHandler _jwtTokenHandler;
-    public DonationController(IMediator mediator, IMapper mapper, JwtTokenHandler jwtTokenHandler)
+    public DonationsController(IMediator mediator, IMapper mapper, JwtTokenHandler jwtTokenHandler)
     {
         _mediator = mediator;
         _mapper = mapper;
@@ -25,13 +20,18 @@ public class DonationController : ControllerBase
     }
 
     /// <summary>
-    /// Create a Donation and Payment Intent
+    /// Create a Donation and Payment Intent (backwards compatibility)
     /// </summary>
     /// <param name="request">Request json</param>
+    /// <param name="language">x</param>
+    /// <param name="cancellationToken">x</param>
     /// <returns>Information about the newly created payment intent</returns>
-    [HttpPost("intent")]
+    [HttpPost("/api/donation/intent")]
     [ProducesResponseType(typeof(CreateDonationIntentResponse), StatusCodes.Status200OK, "application/json")]
-    public async Task<IActionResult> CreatePaymentIntent([FromBody] CreateDonationIntentRequest request)
+    public async Task<IActionResult> CreatePaymentIntent(
+        [FromBody] CreateDonationIntentRequest request,
+        [FromHeader(Name = "Accept-Language")] string language,
+        CancellationToken cancellationToken)
     {
         //request.Language = LanguageUtils.GetLanguageId(request.Language, HttpContext.Request.Headers.AcceptLanguage, "en");
 

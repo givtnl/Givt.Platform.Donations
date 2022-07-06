@@ -1,8 +1,4 @@
-﻿//using Givt.OnlineCheckout.Business.Exceptions;
-//using Givt.OnlineCheckout.Business.Extensions;
-//using Givt.OnlineCheckout.Infrastructure.DbContexts;
-//using Givt.OnlineCheckout.Persistance.Entities;
-using Givt.Donations.Persistence.DbContexts;
+﻿using Givt.Donations.Persistence.DbContexts;
 using MediatR.Pipeline;
 using Microsoft.EntityFrameworkCore;
 using System.Text;

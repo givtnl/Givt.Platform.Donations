@@ -1,5 +1,5 @@
-﻿using Givt.Donations.Domain.Entities.Base;
-using Givt.Donations.Domain.Interfaces;
+﻿using Givt.Platform.EF.Entities;
+using Givt.Platform.EF.Interfaces;
 
 namespace Givt.Donations.Domain.Entities;
 

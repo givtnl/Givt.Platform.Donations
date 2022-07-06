@@ -5,9 +5,8 @@ namespace Givt.Donations.Domain.Interfaces;
 public interface IDonation 
 {
     public Guid MediumId { get; set; }    
-    public Guid DonorId { get; set; }    
-    public Guid RecipientId { get; set; }    
-    public Guid CampaignId { get; set; }    
+    public Guid DonorId { get; set; }
+    public Guid PaymentProviderLinkId { get; set; }
     public string Currency { get; set; }
     public int Amount { get; set; }
     public DateTime DonationDateTime { get; set; }

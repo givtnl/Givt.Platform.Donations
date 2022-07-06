@@ -10,14 +10,14 @@ public record CreateDonationIntentCommandAfterIntentSucceededHandler(DonationsCo
 {
     public async Task Process(CreateDonationIntentCommand request, CreateDonationIntentCommandResponse response, CancellationToken cancellationToken)
     {
-        Guid campaignId = Guid.NewGuid(); // TODO: implement, get from Givt.Platform.Core on request.MediumId
+        Guid paymentProviderLinkId = Guid.NewGuid(); // TODO: implement, get from Givt.Platform.Core on request.MediumId, get proper PSP using broker
         var dataDonation = new Donation
         {
-            Amount = Convert.ToInt32(request.Amount*100),
+            Amount = Convert.ToInt32(request.Amount * 100),
             TransactionReference = response.TransactionReference,
             DonationDateTime = DateTime.UtcNow,
             //TimezoneOffset = request.TimezoneOffset,
-            CampaignId = campaignId,
+            PaymentProviderLinkId = paymentProviderLinkId,
             Currency = request.Currency
         };
         await DbContext.Donations.AddAsync(dataDonation, cancellationToken);

@@ -1,6 +1,5 @@
 ﻿using Givt.Donations.Domain.Entities;
-using Givt.Donations.Persistence.Configurations.Base;
-using Microsoft.EntityFrameworkCore;
+using Givt.Platform.EF.Configurations;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Givt.Donations.Persistence.Configurations;
@@ -16,7 +15,7 @@ public class PayOutConfiguration : EntityBaseConfiguration<PayOut>
             .HasMaxLength(3);
 
         builder
-            .Property(e => e.PaymentProviderId)
+            .Property(e => e.PaymentProviderReference)
             .HasMaxLength(100);
     }
 }

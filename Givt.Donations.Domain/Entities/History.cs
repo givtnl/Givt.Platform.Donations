@@ -1,5 +1,5 @@
-﻿using Givt.Donations.Domain.Enums;
-using Givt.Donations.Domain.Interfaces;
+﻿using Givt.Platform.EF.Enums;
+using Givt.Platform.EF.Interfaces;
 
 namespace Givt.Donations.Domain.Entities
 {
@@ -7,6 +7,6 @@ namespace Givt.Donations.Domain.Entities
     {
         public Guid Id { get; set; }
         public DateTime Modified { get; set; }
-        public LogReason Reason { get; set; }
+        public EntityLogReason Reason { get; set; }
     }
 }

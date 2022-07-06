@@ -10,4 +10,10 @@
     <PackageReference Include="AutoMapper" Version="11.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Givt.Platform\Givt.Platform.Common\Givt.Platform.Common.csproj" />
+    <ProjectReference Include="..\Givt.Platform\Givt.Platform.EF\Givt.Platform.EF.csproj" />
+    <ProjectReference Include="..\Givt.Platform\Givt.Platform.Payments\Givt.Platform.Payments.csproj" />
+  </ItemGroup>
+
 </Project>

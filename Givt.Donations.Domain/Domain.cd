@@ -4,10 +4,9 @@
     <Position X="8" Y="1.25" Width="2.5" />
     <Members>
       <Property Name="CampaignId" Hidden="true" />
-      <Property Name="PaymentProviderId" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAQgACYCABwAAAgECgAAEIwCAAAABQAEAAAgAIAEAA=</HashCode>
+      <HashCode>AAAQgACYGABwAAAgECgAAEIgCAAAABQAEAAAgAIAEAA=</HashCode>
       <FileName>Entities\PayOut.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -15,24 +14,24 @@
   <Class Name="Givt.Donations.Domain.Entities.Donation">
     <Position X="0.5" Y="1.5" Width="2.25" />
     <Members>
-      <Property Name="CampaignId" Hidden="true" />
       <Property Name="DonorId" Hidden="true" />
       <Property Name="HistoryEntityType" Hidden="true" />
       <Property Name="MediumId" Hidden="true" />
       <Property Name="PayinId" Hidden="true" />
-      <Property Name="RecipientId" Hidden="true" />
+      <Property Name="PaymentProviderLinkId" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAQAAAQACAAAEBAAAAECACACAAAIACAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAQAAAAAACAAAEBAAAAECACACAAAIACAAAAAAAEAgAA=</HashCode>
       <FileName>Entities\Donation.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Payin" />
+      <Property Name="PaymentProviderLink" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Givt.Donations.Domain.Entities.PayIn">
-    <Position X="3.75" Y="1.25" Width="2.5" />
+    <Position X="3.75" Y="2.75" Width="2.5" />
     <Members>
       <Property Name="PayInMethodId" Hidden="true" />
     </Members>
@@ -46,33 +45,30 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Givt.Donations.Domain.Entities.DonationHistory">
-    <Position X="0.5" Y="5" Width="1.75" />
+    <Position X="0.5" Y="5.75" Width="1.75" />
     <Members>
       <Property Name="Payin" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAQAAAQACAAAEBAAAAECACACAAAIACAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAQAAAAAACAAAEBAAAAECACACAAAIACAAAAAAAEAAAA=</HashCode>
       <FileName>Entities\DonationHistory.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Givt.Donations.Domain.Entities.History">
-    <Position X="3" Y="5" Width="1.5" />
+    <Position X="3" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAIAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\History.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Reason" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Enum Name="Givt.Donations.Domain.Enums.LogReason">
-    <Position X="3" Y="6.75" Width="1.5" />
+  <Class Name="Givt.Donations.Domain.Entities.PaymentProviderLink">
+    <Position X="3.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAQAQAAAAAAAAAA=</HashCode>
-      <FileName>Enums\LogReason.cs</FileName>
+      <HashCode>AAAQAAAQEAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\PaymentProviderLink.cs</FileName>
     </TypeIdentifier>
-  </Enum>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

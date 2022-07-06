@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Givt.OnlineCheckout.API.Models.Reports;
+namespace Givt.Donations.API.Models.Reports;
 
 public class GetDonationReportRequest
 {    

@@ -1,20 +1,19 @@
 using AutoMapper;
-using Givt.API.Filters;
-using Givt.API.Handlers;
-using Givt.API.MiddleWare;
-using Givt.API.Options;
-//using Givt.Donations.API.Mappings;
-//using Givt.Donations.API.Models.Config;
-//using Givt.Donations.Business.CQR.User.Authorisation;
-//using Givt.Donations.Business.Infrastructure.Pipelines;
-//using Givt.Donations.Business.Mappings;
+using Givt.Donations.API.MiddleWare;
+using Givt.Donations.Business.Infrastructure.Health;
 using Givt.Donations.Persistence.DbContexts;
+using Givt.Platform.Common.Filters;
+using Givt.Platform.Common.Infrastructure.Behaviors;
+using Givt.Platform.Common.Loggers;
+using Givt.Platform.JWT.Handlers;
+using Givt.Platform.JWT.Options;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -23,7 +22,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Text;
 
-namespace Givt.API
+namespace Givt.Donations.API
 {
     public class Program
     {
@@ -47,12 +46,15 @@ namespace Givt.API
                 .AddSingleton(sp => sp.GetRequiredService<IOptions<JwtOptions>>().Value);
 
             // logging
-            var logger = new LogitHttpLogger(config["LogitConfiguration:Tag"], config["LogitConfiguration:Key"]);
+            var logitOptions = new LogitHttpLoggerOptions();
+            config.GetSection(LogitHttpLoggerOptions.SectionName).Bind(logitOptions);
+            var logger = new LogitHttpLogger(logitOptions);
             builder.Services.AddSingleton<ILog, LogitHttpLogger>(x => logger);
-            logger.Information($"Givt.Core.API started on {builder.Environment.EnvironmentName}");
-            Console.WriteLine($"Givt.Core.API started on {builder.Environment.EnvironmentName}");
 
-            var connectionString = config.GetConnectionString("GivtCoreDb");
+            logger.Information($"Givt.Donations.API started on {builder.Environment.EnvironmentName}");
+            Console.WriteLine($"Givt.Donations.API started on {builder.Environment.EnvironmentName}");
+
+            var connectionString = config.GetConnectionString("GivtDonationsDb");
             LogConnectionString(logger, connectionString);
             builder.Services.AddDbContext<DonationsContext>(options => options
                 .UseNpgsql(connectionString)
@@ -64,6 +66,9 @@ namespace Givt.API
                 .EnableDetailedErrors()
 #endif
             );
+            builder.Services.AddHealthChecks()
+                .AddCheck<DbHealthCheck>("Database", failureStatus: HealthStatus.Unhealthy, tags: new[] { "ready" });
+
 
             builder.Services.AddSingleton(new MapperConfiguration(mc =>
             {
@@ -131,17 +136,20 @@ namespace Givt.API
 
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
             builder.Services.AddControllers();
+            builder.Services.AddRouting(options => options.LowercaseUrls = true);
             builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddMvcCore(x => { x.Filters.Add<CustomExceptionFilter>(); })
                 .AddControllersAsServices()
                 .AddMvcOptions(o => o.EnableEndpointRouting = false)
-                .AddCors(o => o.AddPolicy("EnableAll", builder =>
+                .AddCors(o => o.AddPolicy("EnableAll", policyBuilder =>
                 {
-                    builder.AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .AllowAnyOrigin();
+                    policyBuilder
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
                 }));
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -189,6 +197,9 @@ namespace Givt.API
                     .Where(f => File.Exists(f))
                     .ToArray();
                 Array.ForEach(xmlDocs, (d) => { options.IncludeXmlComments(d); });
+
+                // Filter out `api-version` parameters globally
+                options.OperationFilter<ApiVersionFilter>();
             });
 
             var app = builder.Build();
@@ -206,8 +217,6 @@ namespace Givt.API
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-
             var supportedCultures = new[] { "en-US", "en-GB", "nl-NL", "en-NL", "nl-BE", "en-BE", "de-DE" };
 
             app.UseRequestLocalization(options =>
@@ -224,7 +233,7 @@ namespace Givt.API
             //app.UseMvc();
 
             app.Urls.Clear();
-            app.Urls.Add("https://*:5000");
+            app.Urls.Add("http://*:5000");
 
             app.Run();
         }
@@ -240,6 +249,9 @@ namespace Givt.API
         private static string RemovePassword(string connectionString)
         {
             const string PASSWORD = "Password=";
+
+            if (String.IsNullOrEmpty(connectionString))
+                return connectionString;
             var p1 = connectionString.IndexOf(PASSWORD, StringComparison.InvariantCultureIgnoreCase);
             if (p1 >= 0)
             {

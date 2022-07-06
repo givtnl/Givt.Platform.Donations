@@ -3,6 +3,7 @@ using Givt.Donations.Domain.Entities;
 using Givt.Donations.Domain.Enums;
 using Givt.Donations.Domain.Mappings;
 using Givt.Donations.Persistence.DbContexts;
+using Givt.Platform.EF.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Givt.Donations.Persistence.Test
@@ -66,7 +67,7 @@ namespace Givt.Donations.Persistence.Test
                 Assert.That(historyList, Has.Count.EqualTo(1));
                 // test log entry
                 var logged = historyList.Last();
-                Assert.That(logged.Reason, Is.EqualTo(LogReason.Created));
+                Assert.That(logged.Reason, Is.EqualTo(EntityLogReason.Created));
                 CheckPropertiesCopied(donation, logged);
             }
 
@@ -81,7 +82,7 @@ namespace Givt.Donations.Persistence.Test
                 var historyList = GetHistoryList(context, donationId);
                 Assert.That(historyList, Has.Count.EqualTo(2));
                 var logged = historyList.Last();
-                Assert.That(logged.Reason, Is.EqualTo(LogReason.Updated));
+                Assert.That(logged.Reason, Is.EqualTo(EntityLogReason.Updated));
                 CheckPropertiesCopied(donation, logged);
             }
 
@@ -94,7 +95,7 @@ namespace Givt.Donations.Persistence.Test
                 var historyList = GetHistoryList(context, donationId);
                 Assert.That(historyList, Has.Count.EqualTo(3));
                 var logged = historyList.Last();
-                Assert.That(logged.Reason, Is.EqualTo(LogReason.Deleted));
+                Assert.That(logged.Reason, Is.EqualTo(EntityLogReason.Deleted));
             }
 
             // clean up
@@ -115,8 +116,7 @@ namespace Givt.Donations.Persistence.Test
                 Assert.That(donation.Id, Is.EqualTo(logged.Id));
                 Assert.That(donation.MediumId, Is.EqualTo(logged.MediumId));
                 Assert.That(donation.DonorId, Is.EqualTo(logged.DonorId));
-                Assert.That(donation.RecipientId, Is.EqualTo(logged.RecipientId));
-                Assert.That(donation.CampaignId, Is.EqualTo(logged.CampaignId));
+                Assert.That(donation.PaymentProviderLinkId, Is.EqualTo(logged.PaymentProviderLinkId));
                 Assert.That(donation.Currency, Is.EqualTo(logged.Currency));
                 Assert.That(donation.Amount, Is.EqualTo(logged.Amount));
                 Assert.That(donation.DonationDateTime, Is.EqualTo(logged.DonationDateTime));

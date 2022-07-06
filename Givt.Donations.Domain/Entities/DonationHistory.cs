@@ -1,4 +1,5 @@
 ﻿using Givt.Donations.Domain.Interfaces;
+using Givt.Platform.EF.Interfaces;
 
 namespace Givt.Donations.Domain.Entities;
 
@@ -6,8 +7,7 @@ public class DonationHistory : History, IHistory, IDonation
 {
     public Guid MediumId { get; set; }
     public Guid DonorId { get; set; }
-    public Guid RecipientId { get; set; }
-    public Guid CampaignId { get; set; }
+    public Guid PaymentProviderLinkId { get; set; }
     public string Currency { get; set; }
     public int Amount { get; set; }
     public DateTime DonationDateTime { get; set; }

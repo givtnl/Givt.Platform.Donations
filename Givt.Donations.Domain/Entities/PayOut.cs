@@ -1,5 +1,5 @@
-﻿using Givt.Donations.Domain.Entities.Base;
-using Givt.Donations.Domain.Interfaces;
+﻿using Givt.Platform.EF.Entities;
+using Givt.Platform.EF.Interfaces;
 
 namespace Givt.Donations.Domain.Entities;
 
@@ -33,7 +33,7 @@ public class PayOut : EntityBase, IEntity
 
     public decimal TotalPaid { get; set; }
 
-    public string PaymentProviderId { get; set; }
+    public string PaymentProviderReference { get; set; }
 
     public Guid CampaignId { get; set; }
     public Guid RecipientId { get; set; }
