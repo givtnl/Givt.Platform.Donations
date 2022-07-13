@@ -26,7 +26,6 @@
     <ProjectReference Include="..\Givt.Donations.Domain\Givt.Donations.Domain.csproj" />
     <ProjectReference Include="..\Givt.Platform\Givt.Platform.CockroachDb\Givt.Platform.CockroachDb.csproj" />
     <ProjectReference Include="..\Givt.Platform\Givt.Platform.EF\Givt.Platform.EF.csproj" />
-    <ProjectReference Include="..\Givt.Platform\Givt.Platform.Payments\Givt.Platform.Payments.csproj" />
   </ItemGroup>
 
 </Project>

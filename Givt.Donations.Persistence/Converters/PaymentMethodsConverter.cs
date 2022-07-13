@@ -1,4 +1,4 @@
-﻿using Givt.Platform.Payments.Enums;
+﻿using Givt.Platform.Common.Enums;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 

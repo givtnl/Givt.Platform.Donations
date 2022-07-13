@@ -1,7 +1,7 @@
 ﻿namespace Givt.Donations.Business.QRS.Donations.Create;
 
-public class CreateDonationIntentCommandResponse
+public class DonationCreateResponse
 {
-    public string PaymentIntentSecret { get; set; }
+    public string PaymentToken { get; set; }
     public string TransactionReference { get; set; }
 }

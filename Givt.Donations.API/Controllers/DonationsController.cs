@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Givt.Donations.API.Models.Donations;
+using Givt.Donations.Business.QRS.Donations.Create;
+using Givt.Platform.Common.Utils;
 using Givt.Platform.JWT.Handlers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -33,16 +35,12 @@ public class DonationsController : ControllerBase
         [FromHeader(Name = "Accept-Language")] string language,
         CancellationToken cancellationToken)
     {
-        //request.Language = LanguageUtils.GetLanguageId(request.Language, HttpContext.Request.Headers.AcceptLanguage, "en");
-
-        //var applicationFee = await _mediator.Send(new GetApplicationFeeQuery { MediumIdType = MediumIdType.FromString(request.Medium) });
-
-        //var command = _mapper.Map<CreateDonationIntentCommand>(request, applicationFee);
-
-        //var model = await _mediator.Send(command);
-        //var response = _mapper.Map<CreateDonationIntentResponse>(model, opt => { opt.Items[Keys.TOKEN_HANDLER] = _jwtTokenHandler; });
-        //return Ok(response);
-        return null;
+        var languages = LanguageUtils.GetLanguages(language, request.Language);
+        var command = _mapper.Map<DonationCreateCommand>(request);
+        command.Languages = languages;
+        var model = await _mediator.Send(command);
+        var response = _mapper.Map<CreateDonationIntentResponse>(model/*, opt => { opt.Items[Keys.TOKEN_HANDLER] = _jwtTokenHandler; }*/);
+        return Ok(response);
     }
 
 }

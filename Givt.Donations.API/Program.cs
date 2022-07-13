@@ -1,10 +1,10 @@
 using AutoMapper;
-using Givt.Donations.API.MiddleWare;
 using Givt.Donations.Business.Infrastructure.Health;
 using Givt.Donations.Persistence.DbContexts;
 using Givt.Platform.Common.Filters;
 using Givt.Platform.Common.Infrastructure.Behaviors;
 using Givt.Platform.Common.Loggers;
+using Givt.Platform.Common.MiddleWare;
 using Givt.Platform.JWT.Handlers;
 using Givt.Platform.JWT.Options;
 using MediatR;

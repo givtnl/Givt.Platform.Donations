@@ -1,5 +1,5 @@
 ﻿using Givt.Platform.EF.Entities;
-using Givt.Platform.Payments.Enums;
+using Givt.Platform.Common.Enums;
 
 namespace Givt.Donations.Domain.Entities;
 
